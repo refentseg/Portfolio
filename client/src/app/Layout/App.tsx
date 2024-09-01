@@ -2,9 +2,11 @@ import { Outlet, useLocation } from 'react-router-dom'
 import HomePage from '../../Features/Home/HomePage'
 import './App.css'
 import Header from './Header'
+import Footer from './Footer'
 
 function App() {
   const location = useLocation();
+  const [loading,setLoading] = useState(false);
   return (
     <>
     <Header />
@@ -12,6 +14,7 @@ function App() {
       location.pathname === '/' ? <HomePage />:
       <Outlet />
     }
+    <Footer />
     </>
   )
 }
