@@ -11,15 +11,19 @@ export default function ProjectList({projects}:Props){
     const {projectsLoaded} = useAppSelector(state => state.projects)
     return(
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
-        {projects?.map((project) => (
-            <div className="">
-            {! projectsLoaded ? (
-              <ProjectCardSkeleton />
-            ):(
-              <ProjectCard key={project.id} project={project}/>
-            )}
+        {projects?.length === 0 ? (
+        <p className="text-2xl text-gray-300">Project not found</p>
+        ) : (
+          projects?.map((project) => (
+            <div key={project.id} className="">
+              {!projectsLoaded ? (
+                <ProjectCardSkeleton />
+              ) : (
+                <ProjectCard project={project} />
+              )}
             </div>
-        ))}
+          ))
+        )}
         </div>
     )
 }

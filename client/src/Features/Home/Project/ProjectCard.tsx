@@ -1,4 +1,3 @@
-import React from 'react'
 import { Project } from '../../../app/models/project';
 interface Props {
     project: Project;

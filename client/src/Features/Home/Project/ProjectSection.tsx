@@ -1,11 +1,13 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../app/Store/configureStore";
-import { fetchProjectsAsync, projectSelectors } from "./projectsSlice";
+import { fetchProjectsAsync, projectSelectors, setPageNumber } from "./projectsSlice";
 import ProjectList from "./ProjectList";
+import ProjectSearch from "./ProjectSearch";
+import Pagination from "../../../components/Pagination";
 
 export default function ProjectSection() {
   const projects = useAppSelector(projectSelectors.selectAll);
-  const { projectsLoaded, filtersLoaded,projectParams,metaData } =
+  const { projectsLoaded,metaData } =
     useAppSelector((state) => state.projects);
   const dispatch = useAppDispatch();
 
@@ -20,10 +22,17 @@ export default function ProjectSection() {
       <div className='text-3xl font-bold '><span>My Projects</span>
       <hr className='mt-2 border-neutral-400'/>
       </div>
+      <ProjectSearch />
       <div>
-        {!projectsLoaded ? <p>Loading Projects ...</p> : <ProjectList projects={projects}/>}
+         <ProjectList projects={projects}/>
       </div>
-      
+      <div>
+        {metaData &&
+        <Pagination
+        metaData={metaData}
+        onPageChange={(page:number)=>dispatch(setPageNumber({pageNumber: page}))} />
+        }
+      </div>
     </div>
   )
 }

@@ -2,7 +2,7 @@
 import VideoBG from '/video.mp4'
 export default function Contact() {
   return (
-    <div className="flex md:min-h-screen mb-6 items-center justify-start contact-background">
+    <div className="flex md:min-h-screen items-center justify-start contact-background">
       <div className="hidden md:block overlay"></div>
        <video className="hidden md:block video-overlay"src={VideoBG} autoPlay loop muted></video>
     <div className="md:absolute z-10 mx-auto w-full max-w-lg mt-6 md:mt-0 rounded-md p-8 bg-[#00041b] bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-50 backdrop-saturate-50 backdrop-contrast-50">

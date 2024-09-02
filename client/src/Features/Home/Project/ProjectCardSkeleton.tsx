@@ -1,5 +1,3 @@
-import React from 'react'
-
 export default function ProjectCardSkeleton() {
   return (
     <div className="relative backdrop-blur-md bg-[#00041b]/30 rounded-lg p-6 shadow-lg border border-[#00041b]/50 overflow-hidden animate-pulse">
