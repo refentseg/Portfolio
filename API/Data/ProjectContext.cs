@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Entity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data
 {
-    public class ProjectContext:DbContext
+    public class ProjectContext: IdentityDbContext<User, Role, int>
     {
         public ProjectContext(DbContextOptions options) :base(options)
        {
@@ -16,6 +17,7 @@ namespace API.Data
 
        public DbSet<Project> Projects{get;set;}
        public DbSet<Technology> Technologies{get;set;}
+       public DbSet<Auth> Auth {get;set;}
 
 
        protected override void OnModelCreating(ModelBuilder builder)
@@ -41,10 +43,12 @@ namespace API.Data
          builder.Entity<Project>()
                 .HasMany(p => p.Technologies)
                 .WithMany();
-
-         
-
-
+        builder.Entity<Role>()
+                .HasData(
+                    new Role{Id=1,Name="Member",NormalizedName="MEMBER"},
+                    new Role{Id=2, Name="Admin",NormalizedName="ADMIN"}
+            );
        }
+       
     }
 }

@@ -8,6 +8,7 @@ using API.Entity;
 using API.Extensions;
 using API.RequestHelpers;
 using API.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -48,7 +49,7 @@ namespace API.Controllers
                 .FirstOrDefaultAsync();
 
         }
-
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<ProjectDTO>> CreateProject([FromForm] CreateProjectDto createProjectDto)
         {
@@ -99,7 +100,7 @@ namespace API.Controllers
             if(result) return CreatedAtAction(nameof(GetProject), new { id = project.Id }, projectDto);
             return BadRequest(new ProblemDetails{Title = "Problem creating new product"});
         }
-
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateProject(int id, [FromForm] UpdateProjectDto updateProjectDto)
         {
@@ -162,7 +163,7 @@ namespace API.Controllers
             if(result) return Ok(projectDto);
             return BadRequest(new ProblemDetails{Title="Problem updating project"});
         }
-
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProject(int id)
         {

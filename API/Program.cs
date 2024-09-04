@@ -1,6 +1,13 @@
+using System.Text;
 using API.Data;
+using API.Entity;
 using API.Services;
+using DotNetAPI.Helpers;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +16,32 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPIv5", Version = "v1" });
+    var jwtSecurityScheme = new OpenApiSecurityScheme
+    {
+        BearerFormat = "JWT",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = JwtBearerDefaults.AuthenticationScheme,
+        Description ="Bearer + Token",
+        Reference = new OpenApiReference
+        {
+            Id = JwtBearerDefaults.AuthenticationScheme,
+            Type = ReferenceType.SecurityScheme
+        }
+        
+    };
+    c.AddSecurityDefinition(jwtSecurityScheme.Reference.Id,jwtSecurityScheme);
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            jwtSecurityScheme,Array.Empty<string>()
+        }
+    });
+});
 
 builder.Services.AddCors((options)=>{
     options.AddPolicy("DevCors",(corsBuilder)=>{
@@ -22,14 +54,32 @@ builder.Services.AddCors((options)=>{
 
     options.AddPolicy("ProdCors",(corsBuilder)=>{
         //domain where front-end is at
-        corsBuilder.WithOrigins("https://refentsegaonnwe.co.za")
+        corsBuilder.WithOrigins("https://refentsegaonnwe.co.za","https://test.refentsegaonnwe.co.za")
             .AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials();
     });
 });
 
+builder.Services.AddIdentityCore<User>()
+    .AddRoles<Role>()
+    .AddEntityFrameworkStores<ProjectContext>();
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(opt =>{
+        opt.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer =false,
+            ValidateAudience = false,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey =true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["AppSettings:tokenKey"]!))
+        };
+    });
+builder.Services.AddAuthorization();
+
 builder.Services.AddScoped<ImageService>();
+builder.Services.AddScoped<AuthHelper>();
 
 builder.Services.AddDbContext<ProjectContext>(opt =>{
     opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
@@ -50,10 +100,11 @@ if (app.Environment.IsDevelopment())
 
 
 // app.UseHttpsRedirection();
-
+app.UseStaticFiles();
+app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
+app.MapFallbackToController("Index","Fallback");
 
 using var scope = app.Services.CreateScope();
 var context = scope.ServiceProvider.GetRequiredService<ProjectContext>();

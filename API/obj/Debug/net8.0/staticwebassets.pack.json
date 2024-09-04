@@ -1,0 +1,97 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\Developer\\Projects\\PortfolioSite\\API\\wwwroot\\Me.jpg",
+      "PackagePath": "staticwebassets\\Me.jpg"
+    },
+    {
+      "Id": "D:\\Developer\\Projects\\PortfolioSite\\API\\wwwroot\\assets\\index-5jVCqLpo.css",
+      "PackagePath": "staticwebassets\\assets\\index-5jVCqLpo.css"
+    },
+    {
+      "Id": "D:\\Developer\\Projects\\PortfolioSite\\API\\wwwroot\\assets\\index-CSUWcEXB.js",
+      "PackagePath": "staticwebassets\\assets\\index-CSUWcEXB.js"
+    },
+    {
+      "Id": "D:\\Developer\\Projects\\PortfolioSite\\API\\wwwroot\\fonts\\SKMerih\\SKMerih-Bold.ttf",
+      "PackagePath": "staticwebassets\\fonts\\SKMerih\\SKMerih-Bold.ttf"
+    },
+    {
+      "Id": "D:\\Developer\\Projects\\PortfolioSite\\API\\wwwroot\\fonts\\SKMerih\\SKMerih-BoldItalic.ttf",
+      "PackagePath": "staticwebassets\\fonts\\SKMerih\\SKMerih-BoldItalic.ttf"
+    },
+    {
+      "Id": "D:\\Developer\\Projects\\PortfolioSite\\API\\wwwroot\\fonts\\SKMerih\\SKMerih-ExtraLight.ttf",
+      "PackagePath": "staticwebassets\\fonts\\SKMerih\\SKMerih-ExtraLight.ttf"
+    },
+    {
+      "Id": "D:\\Developer\\Projects\\PortfolioSite\\API\\wwwroot\\fonts\\SKMerih\\SKMerih-ExtraLightItalic.ttf",
+      "PackagePath": "staticwebassets\\fonts\\SKMerih\\SKMerih-ExtraLightItalic.ttf"
+    },
+    {
+      "Id": "D:\\Developer\\Projects\\PortfolioSite\\API\\wwwroot\\fonts\\SKMerih\\SKMerih-Italic.ttf",
+      "PackagePath": "staticwebassets\\fonts\\SKMerih\\SKMerih-Italic.ttf"
+    },
+    {
+      "Id": "D:\\Developer\\Projects\\PortfolioSite\\API\\wwwroot\\fonts\\SKMerih\\SKMerih-Light.ttf",
+      "PackagePath": "staticwebassets\\fonts\\SKMerih\\SKMerih-Light.ttf"
+    },
+    {
+      "Id": "D:\\Developer\\Projects\\PortfolioSite\\API\\wwwroot\\fonts\\SKMerih\\SKMerih-LightItalic.ttf",
+      "PackagePath": "staticwebassets\\fonts\\SKMerih\\SKMerih-LightItalic.ttf"
+    },
+    {
+      "Id": "D:\\Developer\\Projects\\PortfolioSite\\API\\wwwroot\\fonts\\SKMerih\\SKMerih-Medium.ttf",
+      "PackagePath": "staticwebassets\\fonts\\SKMerih\\SKMerih-Medium.ttf"
+    },
+    {
+      "Id": "D:\\Developer\\Projects\\PortfolioSite\\API\\wwwroot\\fonts\\SKMerih\\SKMerih-MediumItalic.ttf",
+      "PackagePath": "staticwebassets\\fonts\\SKMerih\\SKMerih-MediumItalic.ttf"
+    },
+    {
+      "Id": "D:\\Developer\\Projects\\PortfolioSite\\API\\wwwroot\\fonts\\SKMerih\\SKMerih-Regular.ttf",
+      "PackagePath": "staticwebassets\\fonts\\SKMerih\\SKMerih-Regular.ttf"
+    },
+    {
+      "Id": "D:\\Developer\\Projects\\PortfolioSite\\API\\wwwroot\\fonts\\SKMerih\\SKMerih-SemiBold.ttf",
+      "PackagePath": "staticwebassets\\fonts\\SKMerih\\SKMerih-SemiBold.ttf"
+    },
+    {
+      "Id": "D:\\Developer\\Projects\\PortfolioSite\\API\\wwwroot\\fonts\\SKMerih\\SKMerih-SemiBoldItalic.ttf",
+      "PackagePath": "staticwebassets\\fonts\\SKMerih\\SKMerih-SemiBoldItalic.ttf"
+    },
+    {
+      "Id": "D:\\Developer\\Projects\\PortfolioSite\\API\\wwwroot\\grogu.png",
+      "PackagePath": "staticwebassets\\grogu.png"
+    },
+    {
+      "Id": "D:\\Developer\\Projects\\PortfolioSite\\API\\wwwroot\\illu\\ufo.svg",
+      "PackagePath": "staticwebassets\\illu\\ufo.svg"
+    },
+    {
+      "Id": "D:\\Developer\\Projects\\PortfolioSite\\API\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "D:\\Developer\\Projects\\PortfolioSite\\API\\wwwroot\\video.mp4",
+      "PackagePath": "staticwebassets\\video.mp4"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.API.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.API.props",
+      "PackagePath": "build\\API.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.API.props",
+      "PackagePath": "buildMultiTargeting\\API.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.API.props",
+      "PackagePath": "buildTransitive\\API.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
