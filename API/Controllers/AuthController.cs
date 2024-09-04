@@ -28,6 +28,10 @@ namespace API.Controllers
         [HttpPost("Register")]
         public async Task<IActionResult> Register(UserForRegistrationDto registrationDto)
         {
+            if (await _userManager.Users.AnyAsync())
+            {
+                return BadRequest("Registration is no longer available.");
+            }
             if (registrationDto.Password != registrationDto.PasswordConfirm)
             {
                 return BadRequest("Passwords do not Match");

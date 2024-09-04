@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ivVJGwWKoZM7QRjzqD0+FaSGrD/ROaE/6VO9qn4h5F4=",
+  "Hash": "T4T6eLKZtUQ+6NaaWE7YORhABtDEAoTmCXopxX1dVaU=",
   "Source": "API",
   "BasePath": "_content/API",
   "Mode": "Default",
@@ -17,12 +17,12 @@
   ],
   "Assets": [
     {
-      "Identity": "D:\\Developer\\Projects\\PortfolioSite\\API\\wwwroot\\assets\\index-5jVCqLpo.css",
+      "Identity": "D:\\Developer\\Projects\\PortfolioSite\\API\\wwwroot\\assets\\index-CB9aw0qB.css",
       "SourceId": "API",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\Developer\\Projects\\PortfolioSite\\API\\wwwroot\\",
       "BasePath": "_content/API",
-      "RelativePath": "assets/index-5jVCqLpo.css",
+      "RelativePath": "assets/index-CB9aw0qB.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -33,15 +33,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\assets\\index-5jVCqLpo.css"
+      "OriginalItemSpec": "wwwroot\\assets\\index-CB9aw0qB.css"
     },
     {
-      "Identity": "D:\\Developer\\Projects\\PortfolioSite\\API\\wwwroot\\assets\\index-CSUWcEXB.js",
+      "Identity": "D:\\Developer\\Projects\\PortfolioSite\\API\\wwwroot\\assets\\index-NE4o_YzB.js",
       "SourceId": "API",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\Developer\\Projects\\PortfolioSite\\API\\wwwroot\\",
       "BasePath": "_content/API",
-      "RelativePath": "assets/index-CSUWcEXB.js",
+      "RelativePath": "assets/index-NE4o_YzB.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -52,7 +52,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\assets\\index-CSUWcEXB.js"
+      "OriginalItemSpec": "wwwroot\\assets\\index-NE4o_YzB.js"
     },
     {
       "Identity": "D:\\Developer\\Projects\\PortfolioSite\\API\\wwwroot\\fonts\\SKMerih\\SKMerih-Bold.ttf",

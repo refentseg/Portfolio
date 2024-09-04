@@ -2,6 +2,7 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 import { Paginatedresponse } from "../models/pagination";
 import { toast } from "react-toastify";
 import { router } from "../router/Routes";
+import { store } from "../Store/configureStore";
 
 const sleep = () => new Promise(resolve=>setTimeout(resolve,500));
 
@@ -9,6 +10,14 @@ axios.defaults.baseURL =import.meta.env.VITE_APP_API_URL;
 axios.defaults.withCredentials=true;
 
 const responseBody = (response:AxiosResponse) => response.data;
+
+axios.interceptors.request.use(config =>{
+    const token = store.getState().account.user?.token;
+    if(token) {
+        (config.headers as any).Authorization = `Bearer ${token}`;
+    }
+    return config;
+})
 
 axios.interceptors.response.use(async response =>{
     if(import.meta.env.DEV) await sleep();
@@ -72,6 +81,12 @@ function createFormData(item:any) {
     return formData;
 }
 
+const Account ={
+    login: (values:any) =>requests.post('auth/login',values),
+    register: (values:any) =>requests.post('auth/register',values),
+}
+
+
 const Admin ={
     createProject: (project:any) => requests.postForm('project',createFormData(project)),
     updateProject: (project:any) => requests.putForm('project',createFormData(project)),
@@ -84,6 +99,7 @@ const Projects = {
 }
 
 const agent = {
+    Account,
     Admin,
     Projects
 }

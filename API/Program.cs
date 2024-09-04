@@ -108,12 +108,13 @@ app.MapFallbackToController("Index","Fallback");
 
 using var scope = app.Services.CreateScope();
 var context = scope.ServiceProvider.GetRequiredService<ProjectContext>();
+var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
 var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
 
 try
 {
     await context.Database.MigrateAsync();
-    await DBIntializier.IntializeAsync(context);
+    await DBIntializier.IntializeAsync(context,userManager);
 }
 catch (Exception ex)
 {
