@@ -1,5 +1,4 @@
 import { Menu } from "lucide-react";
-import { AnyIfEmpty } from "react-redux";
 
 export default function Header(){
   function scrollToElement(id:any, offset = 0) {
@@ -41,7 +40,7 @@ export default function Header(){
             <li className="navbar-item"><a href="#skills" onClick={(e) => { e.preventDefault();scrollToElement('skills',40); }}>Skills</a></li>
             <li>
               <div className="btn">
-                <a href="/contact">Contact Me</a>
+                <a href="#contact" onClick={(e) => { e.preventDefault();scrollToElement('contact',40); }}>Contact Me</a>
               </div>
             </li>
           </ul>

@@ -7,7 +7,7 @@ interface Props {
   }
   
   export default function Pagination({ metaData, onPageChange }: Props) {
-    const{currentPage,totalCount,totalPages,pageSize} =metaData
+    const{currentPage,totalPages} =metaData
   
     const handlePageChange = (newPage: number) => {
       if (newPage >= 1 && newPage <= totalPages) {
