@@ -7,7 +7,7 @@ import {yupResolver} from "@hookform/resolvers/yup"
 import { useEffect, useState} from "react";
 import { setProject } from "../../Home/Project/projectsSlice";
 import CreatableSelect  from 'react-select/creatable';
-import { MultiValue, ActionMeta } from 'react-select';
+import { MultiValue} from 'react-select';
 
 interface Props{
     project?:Project;
@@ -43,8 +43,7 @@ export default function ProjectForm({project,cancelEdit}:Props) {
     const dispatch = useAppDispatch();
   const [selectedOptions,setSelectedOptions] = useState<Option[]>([]);
   const handleChange = (
-    selectedOption: MultiValue<Option>,
-    actionMeta: ActionMeta<Option>
+    selectedOption: MultiValue<Option>
   ) => {
     setSelectedOptions(selectedOption as Option[]);
   };
