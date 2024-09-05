@@ -41,7 +41,7 @@ namespace API.Controllers
         }
 
         [HttpGet("{id}",Name ="GetProject")]
-        public async Task<ActionResult<ProjectDTO>> GetProject(int id)
+        public async Task<ActionResult<ProjectDTO>> GetProject(Guid id)
         {
             return await _context.Projects
                 .ProjectProjectToProjectDto()
@@ -102,7 +102,7 @@ namespace API.Controllers
         }
         [Authorize]
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateProject(int id, [FromForm] UpdateProjectDto updateProjectDto)
+        public async Task<IActionResult> UpdateProject(Guid id, [FromForm] UpdateProjectDto updateProjectDto)
         {
             var project = await _context.Projects
                 .Include(p => p.Technologies)

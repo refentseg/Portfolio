@@ -27,6 +27,10 @@ namespace API.Data
          builder.Entity<Project>(entity =>
         {
             entity.HasKey(e => e.Id);
+            entity.Property(e => e.Id)
+                  .ValueGeneratedOnAdd()
+                  .HasDefaultValueSql("NEWID()");
+            //PostgreSQL  .HasDefaultValueSql("uuid_generate_v4()");
             entity.Property(e => e.Name).IsRequired().HasMaxLength(100);
             entity.Property(e => e.Description).HasMaxLength(500);
             entity.Property(e => e.PictureUrl).HasMaxLength(255);

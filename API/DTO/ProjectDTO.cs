@@ -7,7 +7,7 @@ namespace API.DTO
 {
     public class ProjectDTO
     {
-        public int Id {get;set;}
+        public Guid Id {get;set;}
 
         public string PictureUrl{get;set;} = "";
 
