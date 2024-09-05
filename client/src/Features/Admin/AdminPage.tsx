@@ -69,7 +69,7 @@ const dispatch = useAppDispatch();
               <tr key={project.id} className="border-b border-gray-200 hover:bg-gray-50">
                 <td className="py-3 px-6 text-left whitespace-nowrap">{project.name}</td>
                 <td className="py-3 px-6 text-left w-[800px]">{project.description}</td>
-                <td className="py-3 px-6 text-left">{project.technologies}</td>
+                <td className="py-3 px-6 text-left">{project.technologies.join(', ')}</td>
                 <td className="py-3 px-6 text-center">
                   <div className="flex justify-center space-x-4">
                     <button 
