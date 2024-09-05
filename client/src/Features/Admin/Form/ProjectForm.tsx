@@ -1,18 +1,22 @@
 import { Controller, FieldValues, useForm } from "react-hook-form";
 import { Project } from "../../../app/models/project";
 import { validationSchema } from "./projectVaildation";
-import { zodResolver } from '@hookform/resolvers/zod';
 import { useAppDispatch } from "../../../app/Store/configureStore";
 import agent from "../../../app/api/agent";
-import { ChangeEvent, useEffect, useState } from "react";
+import {yupResolver} from "@hookform/resolvers/yup"
+import { useEffect, useState} from "react";
 import { setProject } from "../../Home/Project/projectsSlice";
-import CreatableSelect from 'react-select/creatable';
+import CreatableSelect  from 'react-select/creatable';
+import { MultiValue, ActionMeta } from 'react-select';
 
 interface Props{
     project?:Project;
     cancelEdit:() => void;
 }
-
+interface Option{
+  value:string,
+  label:string
+}
 const techOptions = [
   { value: '.Net', label: '.Net' },
 { value: 'React', label: 'React' },
@@ -35,28 +39,35 @@ const techOptions = [
 ]
 
 export default function ProjectForm({project,cancelEdit}:Props) {
-    const [imagePreview, setImagePreview] = useState('');
-    const { control,reset,handleSubmit,watch,formState:{isDirty,isSubmitting,errors} } = useForm({
-        resolver:zodResolver(validationSchema)
-    });
-    const watchFile = watch('file',null)
+  
     const dispatch = useAppDispatch();
+  const [selectedOptions,setSelectedOptions] = useState<Option[]>([]);
+  const handleChange = (
+    selectedOption: MultiValue<Option>,
+    actionMeta: ActionMeta<Option>
+  ) => {
+    setSelectedOptions(selectedOption as Option[]);
+  };
+    const { control,reset,handleSubmit,watch,formState:{isDirty,isSubmitting,errors} } = useForm({
+        resolver:yupResolver<any>(validationSchema)
+    });
 
-    useEffect(() => {
-        if(project && !watchFile && !isDirty) reset(project)
-        return ()=>{
-            if(watchFile) URL.revokeObjectURL(watchFile.preview)
-        }
-    },[project,reset,watchFile,isDirty])
-
+    const watchFile = watch('file',null)
+    
     async function handleSubmitData(data:FieldValues){
         try{
+          
+          const technologyValues = selectedOptions.map(option => option.value);
+            const formattedData ={
+              ...data,
+              technologies: technologyValues 
+            }
             let response :Project;
             if(project){
-                response= await agent.Admin.updateProject(data);
+                response= await agent.Admin.updateProject(formattedData);
             }
             else{
-                response = await agent.Admin.createProject(data);
+                response = await agent.Admin.createProject(formattedData);
             }
             dispatch(setProject(response));
             cancelEdit(); //leaves the form
@@ -65,27 +76,22 @@ export default function ProjectForm({project,cancelEdit}:Props) {
             console.log(error)
         }
     }
-    const handleFileChange = (event:ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files?.[0];
-        if (file) {
-          // Create a preview URL and set it to the state
-          const previewUrl = URL.createObjectURL(file);
-          setImagePreview(previewUrl);
-        } else {
-          // Clear the preview URL if no file is selected
-          setImagePreview('');
-        }
-      };
+    useEffect(() => {
+      if(project && !watchFile && !isDirty) reset(project)
+      return ()=>{
+          if(watchFile) URL.revokeObjectURL(watchFile.preview)
+      }
+  },[project,reset,watchFile,isDirty])
   return (
     <form onSubmit={handleSubmit(handleSubmitData)} className="h-full max-w-2xl mx-auto bg-neutral-900 p-8 rounded-lg shadow-xl mt-24 mb-40 ">
     <h2 className="text-3xl font-bold mb-6 text-gray-200">
       {project ? 'Edit Project' : 'Create Project'}
     </h2>
 
-    {imagePreview && (
-      <div className="mb-6">
-        <img src={imagePreview} alt="Image preview" className="w-60 h-60 object-cover mx-auto rounded-lg border-2 border-neutral-700" />
-      </div>
+    {watchFile ?(
+        <img src={watchFile.preview} alt="preview" style={{maxHeight:200}}/>
+    ):(
+        <img src={project?.pictureUrl} alt={project?.name} style={{maxHeight:200}}/>
     )}
 
     <div className="mb-6">
@@ -98,7 +104,6 @@ export default function ProjectForm({project,cancelEdit}:Props) {
             {...field}
             id="file"
             type="file"
-            onChange={handleFileChange}
             className="block w-full text-sm text-gray-300
               file:mr-4 file:py-2 file:px-4
               file:rounded-full file:border-0
@@ -106,6 +111,11 @@ export default function ProjectForm({project,cancelEdit}:Props) {
               file:bg-blue-600 file:text-white
               hover:file:bg-blue-700
               file:cursor-pointer"
+              onChange={(e) => {
+                if (e.target.files?.[0]) {
+                  onChange(e.target.files[0]);
+                }
+              }}
           />
         )}
       />
@@ -167,14 +177,14 @@ export default function ProjectForm({project,cancelEdit}:Props) {
       <Controller
         name="technologies"
         control={control}
-        render={({ field: { onChange, value, ...field } }) => (
+        render={({ field }) => (
           <CreatableSelect
-            {...field}
+          {...field}
             isClearable
-            isMulti
+            isMulti={true}
             options={techOptions}
-            value={value ? value.map((v:string) => ({ value: v, label: v })) : []}
-            onChange={(newValue) => onChange(newValue.map((item) => item.value))}
+            value={selectedOptions}
+            onChange={handleChange}
             className="react-select-container"
             classNamePrefix="react-select"
             styles={{

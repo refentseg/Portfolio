@@ -1,9 +1,13 @@
-import { z } from "zod";
+import * as yup from 'yup'
 
-export const validationSchema = z.object({
-    file: z.instanceof(File).optional(),
-    name: z.string().min(1, "Name is required"),
-    description: z.string().min(1, "Description is required"),
-    link: z.string().url("Invalid URL"),
-    technologies: z.array(z.string()).nonempty("At least one technology is required"),
-});
+export const validationSchema = yup.object({
+    file: yup.mixed().when('pictureUrl',{
+        is:(value:string) => !value,
+        then:schema => schema.required('Please provide image'),
+        otherwise: (schema) => schema.notRequired()
+    }),
+    name: yup.string().min(1, "Name is required"),
+    description: yup.string().min(1, "Description is required"),
+    link: yup.string().url("Invalid URL"),
+    technologies: yup.array().of(yup.string()),
+})

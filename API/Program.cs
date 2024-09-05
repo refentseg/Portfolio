@@ -1,6 +1,7 @@
 using System.Text;
 using API.Data;
 using API.Entity;
+using API.Middleware;
 using API.Services;
 using DotNetAPI.Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -14,8 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
+
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPIv5", Version = "v1" });
@@ -42,6 +42,11 @@ builder.Services.AddSwaggerGen(c =>
         }
     });
 });
+
+builder.Services.AddDbContext<ProjectContext>(opt =>{
+    opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
+
 
 builder.Services.AddCors((options)=>{
     options.AddPolicy("DevCors",(corsBuilder)=>{
@@ -76,16 +81,13 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["AppSettings:tokenKey"]!))
         };
     });
-builder.Services.AddAuthorization();
-
+builder.Services.AddAuthentication();
 builder.Services.AddScoped<ImageService>();
 builder.Services.AddScoped<AuthHelper>();
 
-builder.Services.AddDbContext<ProjectContext>(opt =>{
-    opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
-});
-
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionMiddlewear>();
 
 if (app.Environment.IsDevelopment())
 {

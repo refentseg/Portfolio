@@ -114,5 +114,20 @@ namespace API.Controllers
             return Ok(new Dictionary<string, string> { { "token",token } });
         }
 
+        [Authorize]
+        [HttpGet("currentUser")]
+        public async Task<ActionResult<UserDto>> GetCurrentUser()
+        {
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);            
+
+            return new UserDto
+            {
+                Email = user.Email,
+                Token = await  _authHelper.CreateToken(user)
+            };
+        }
+
+        
+
     }
 }

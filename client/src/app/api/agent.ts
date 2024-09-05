@@ -2,7 +2,6 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 import { Paginatedresponse } from "../models/pagination";
 import { toast } from "react-toastify";
 import { router } from "../router/Routes";
-import { store } from "../Store/configureStore";
 
 const sleep = () => new Promise(resolve=>setTimeout(resolve,500));
 
@@ -11,13 +10,24 @@ axios.defaults.withCredentials=true;
 
 const responseBody = (response:AxiosResponse) => response.data;
 
-axios.interceptors.request.use(config =>{
-    const token = store.getState().account.user?.token;
-    if(token) {
-        (config.headers as any).Authorization = `Bearer ${token}`;
-    }
-    return config;
-})
+// axios.interceptors.request.use(config =>{
+//     const token = store.getState()
+//     if(token) {
+//         (config.headers as any).Authorization = `Bearer ${token}`;
+//     }
+//     return config;
+// })
+axios.interceptors.request.use(
+    (config) => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            config.headers['Authorization'] = `Bearer ${token}`;
+        }
+        return config;
+    },
+    (error) => Promise.reject(error)
+);
+
 
 axios.interceptors.response.use(async response =>{
     if(import.meta.env.DEV) await sleep();
@@ -76,7 +86,13 @@ const requests ={
 function createFormData(item:any) {
     const formData = new FormData();
     for (const key in item){
-        formData.append(key,item[key])
+        if (Array.isArray(item[key])) {
+            item[key].forEach((value: any, index: number) => {
+                formData.append(`${key}[${index}]`, value);
+            });
+        } else {
+            formData.append(key, item[key]);
+        }
     }
     return formData;
 }
@@ -84,13 +100,14 @@ function createFormData(item:any) {
 const Account ={
     login: (values:any) =>requests.post('auth/login',values),
     register: (values:any) =>requests.post('auth/register',values),
+    currentUser:() => requests.get('account/currentUser'),
 }
 
 
 const Admin ={
     createProject: (project:any) => requests.postForm('project',createFormData(project)),
     updateProject: (project:any) => requests.putForm('project',createFormData(project)),
-    deleteProject: (id:number) => requests.delete(`projects/${id}`),
+    deleteProject: (id:number) => requests.delete(`project/${id}`),
 }
 
 const Projects = {

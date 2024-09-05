@@ -12,7 +12,7 @@ export const router = createBrowserRouter([
         path: '/',
         element: <App />,
         children:[
-            {element:<RequireAuth roles={['Admin']}/>,children:[
+            {element:<RequireAuth />,children:[
                 {path: 'admin',element:<AdminPage />}
             ]},
             {path: 'server-error', element: <ServerError />},
