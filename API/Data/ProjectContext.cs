@@ -29,8 +29,10 @@ namespace API.Data
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Id)
                   .ValueGeneratedOnAdd()
-                  .HasDefaultValueSql("NEWID()");
-            //PostgreSQL  .HasDefaultValueSql("uuid_generate_v4()");
+                  .HasDefaultValueSql("gen_random_uuid()")
+                  .IsRequired()
+                  .HasColumnType("uuid");
+            entity.HasIndex(e => e.Id).IsUnique();
             entity.Property(e => e.Name).IsRequired().HasMaxLength(100);
             entity.Property(e => e.Description).HasMaxLength(500);
             entity.Property(e => e.PictureUrl).HasMaxLength(255);
