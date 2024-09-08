@@ -31,7 +31,20 @@ jobs:
           context: "{{defaultContext}}:API"
           push: true
           tags: refentseg/portfolio:latest
-
+  pull-test-branch:
+        if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - name: Set up Git
+              run: |
+                git config user.name 'github-actions'
+                git config user.email 'github-actions@github.com'
+            - name: Pull test branch
+              run: |
+                git fetch origin
+                git checkout test
+                git pull origin test
   deploy:
     needs: docker
     runs-on: ubuntu-latest
@@ -39,8 +52,8 @@ jobs:
       - uses: actions/checkout@v3
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - name: Deploy to Test
-        if: github.ref == 'refs/heads/test'
+        if: github.event_name == 'pull_request' && github.ref == 'refs/heads/test'
         run: flyctl deploy --remote-only -a refentse-portfolio-test
       - name: Deploy to Production
-        if: github.ref == 'refs/heads/main'
+        if: github.event_name == 'pull_request' && github.ref == 'refs/heads/main'
         run: flyctl deploy --remote-only -a refentse-portfolio-live
