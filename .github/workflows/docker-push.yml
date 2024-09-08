@@ -40,7 +40,7 @@ jobs:
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - name: Deploy to Test
         if: github.ref == 'refs/heads/test'
-        run: flyctl deploy --remote-only -a appname-test
+        run: flyctl deploy --remote-only -a refentse-portfolio-test
       - name: Deploy to Production
         if: github.ref == 'refs/heads/main'
-        run: flyctl deploy --remote-only -a appname-live
+        run: flyctl deploy --remote-only -a refentse-portfolio-live
