@@ -52,7 +52,6 @@ jobs:
       - uses: actions/checkout@v3
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - name: Deploy to Test
-        if: github.event_name == 'pull_request' && github.ref == 'refs/heads/test'
         run: flyctl deploy --remote-only -a refentse-portfolio-test
       - name: Deploy to Production
         if: github.event_name == 'pull_request' && github.ref == 'refs/heads/main'
