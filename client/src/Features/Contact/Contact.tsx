@@ -1,5 +1,5 @@
 
-import { useForm } from 'react-hook-form';
+import {  FieldValues, useForm } from 'react-hook-form';
 import VideoBG from '/video.mp4'
 import { AlertTriangle, X } from 'lucide-react';
 import { useState } from 'react';
@@ -22,7 +22,7 @@ export default function Contact() {
   const { register, handleSubmit, formState: { errors } } = useForm({
     mode:'onTouched'
   });
-  const onSubmit = async (data:any) => {
+  const onSubmit = async (data:FieldValues) => {
     setSubmitting(true);
     try{
       await agent.Email.sendMail(data);
@@ -33,6 +33,7 @@ export default function Contact() {
       setIsVisible(true);
     }
     setSubmitting(false);
+
   };
   return (
     <div className="flex mb-6 md:mb-0 md:min-h-screen items-center justify-start contact-background" id="contact">
@@ -94,6 +95,7 @@ export default function Contact() {
         <div className={`flex mt-4 p-2 h-10 rounded justify-between ${status.type === 'success' ? 'bg-green-500' : 'bg-red-500'}`}>
           <div className='mt-0.5'>{status.message}</div>
           <div> <button 
+            type="button"
             onClick={handleClose} 
             className="inline-block text-white hover:text-gray-200 focus:outline-none "
             aria-label="Close"
