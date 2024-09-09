@@ -111,7 +111,7 @@ const Admin ={
 }
 
 const Email = {
-    sendMail:(mail:any) => requests.postForm('contact',createFormData(mail))
+    sendMail:(mail:any) => requests.postForm('contact/submit',createFormData(mail))
 }
 
 const Projects = {
