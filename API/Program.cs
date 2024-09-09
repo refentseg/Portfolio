@@ -85,7 +85,7 @@ builder.Services.AddCors((options)=>{
 
     options.AddPolicy("ProdCors",(corsBuilder)=>{
         //domain where front-end is at
-        corsBuilder.WithOrigins("https://refentsegaonnwe.co.za","https://test.refentsegaonnwe.co.za")
+        corsBuilder.WithOrigins("https://refentsegaonnwe.co.za","https://refentse-portfolio-test.fly.dev","https://refentse-portfolio.fly.dev")
             .AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials();
