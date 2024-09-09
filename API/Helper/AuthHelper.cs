@@ -31,7 +31,7 @@ namespace DotNetAPI.Helpers
                 salt: Encoding.ASCII.GetBytes(passwordSaltPlusString),
                 prf:KeyDerivationPrf.HMACSHA256,
                 iterationCount:999998,
-                numBytesRequested: 512 /8
+                numBytesRequested: 256 /8
             );
         }
 
