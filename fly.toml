@@ -10,7 +10,6 @@ primary_region = 'jnb'
   image = 'refentseg/portfolio:latest'
 
 [env]
-  ASPNETCORE_URLS = 'http://+:8080'
   Cloudinary__ApiKey = '877286754423351'
   Cloudinary__CloudName = 'duzqlkgil'
 
