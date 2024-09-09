@@ -126,9 +126,12 @@ if (app.Environment.IsDevelopment())
 
 }
 
+app.UseRouting();
+app.UseDefaultFiles();
+app.UseStaticFiles();
 
 // app.UseHttpsRedirection();
-app.UseStaticFiles();
+
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();

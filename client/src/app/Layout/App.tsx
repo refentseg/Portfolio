@@ -7,7 +7,9 @@ import { useCallback, useEffect, useState } from 'react'
 import { useAppDispatch } from '../Store/configureStore'
 import { fetchCurrentUser} from '../../Features/account/accountSlice'
 import LoadingComponent from '../../components/LoadingComponent'
-import { ToastContainer } from 'react-toastify'
+import { ToastContainer } from 'react-toastify'  
+import 'react-toastify/dist/ReactToastify.css';
+
 function App() {
   const location = useLocation();
   const dispatch = useAppDispatch();
@@ -27,7 +29,7 @@ if (loading) return <LoadingComponent message="Loading..." />
 
   return (
     <>
-    <ToastContainer position="bottom-right" hideProgressBar />
+    <ToastContainer  />
     <Header />
     {loading?<LoadingComponent message="Loading..." />
       :location.pathname === '/' ? <HomePage />
