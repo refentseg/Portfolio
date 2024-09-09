@@ -33,7 +33,8 @@ namespace API.Services
                 using var stream = file.OpenReadStream();
                 var uploadParams = new ImageUploadParams
                 {
-                    File =  new FileDescription(file.FileName,stream)
+                    File =  new FileDescription(file.FileName,stream),
+                    Folder = "Projects"
                 };
                 uploadResult = await _cloudinary.UploadAsync(uploadParams);
             }
