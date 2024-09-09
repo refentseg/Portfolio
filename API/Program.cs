@@ -122,7 +122,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }else{
     app.UseCors("ProdCors");
-    app.UseHttpsRedirection();
+    // app.UseHttpsRedirection();
 
 }
 
