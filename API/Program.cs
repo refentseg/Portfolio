@@ -43,6 +43,15 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
+builder.Services.AddSingleton<IContactFormEmailSender>(sp => 
+        new SesContactFormEmailSender(
+            builder.Configuration["AWS:AccessKeyId"],
+            builder.Configuration["AWS:SecretAccessKey"],
+            builder.Configuration["AWS:Region"],
+            builder.Configuration["EmailSettings:Email2"],
+            builder.Configuration["EmailSettings:Email2"]
+        ));
+
 string connStr;
 if (builder.Environment.IsDevelopment()){
     connStr = builder.Configuration.GetConnectionString("DefaultConnection");

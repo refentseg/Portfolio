@@ -110,6 +110,10 @@ const Admin ={
     deleteProject: (id:number) => requests.delete(`project/${id}`),
 }
 
+const Email = {
+    sendMail:(mail:any) => requests.postForm('contact',createFormData(mail))
+}
+
 const Projects = {
     list:(params: URLSearchParams)=>requests.get('project',params),
     details:(id:number) => requests.get(`project/${id}`),
@@ -118,7 +122,8 @@ const Projects = {
 const agent = {
     Account,
     Admin,
-    Projects
+    Projects,
+    Email
 }
 
 export default agent;

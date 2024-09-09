@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import VideoBG from '/video.mp4'
 import { AlertTriangle, X } from 'lucide-react';
 import { useState } from 'react';
+import agent from '../../app/api/agent';
 
 interface SubmitStatus {
   type: 'success' | 'error';
@@ -21,10 +22,10 @@ export default function Contact() {
   const { register, handleSubmit, formState: { errors } } = useForm({
     mode:'onTouched'
   });
-  const onSubmit = (data:any) => {
+  const onSubmit = async (data:any) => {
     setSubmitting(true);
     try{
-      console.log(data);
+      await agent.Email.sendMail(data);
       setStatus({ type: 'success', message: 'Message sent successfully!' });
       setIsVisible(true);
     }catch(err){
