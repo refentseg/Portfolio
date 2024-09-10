@@ -94,7 +94,7 @@ export default function AboutSection() {
               </div>
             </div>
             <div className=' mt-2 mb-6 z-10'>
-                <p className='whitespace-normal md:whitespace-pre-line  text-base md:text-lg text-gray-200 break-words'>
+                <p className='whitespace-normal md:whitespace-pre-line  text-md md:text-lg text-gray-200 break-words'>
                 {`A Dedicated web development enthusiast with hands-on experience in creating and launching websites. 
                 I utilize skills in HTML, CSS, JavaScript, and backend technologies like Node.js and ASP.NET. Eager to 
                 contribute innovative solutions, expand technical expertise, and drive impactful projects in a collaborative,
