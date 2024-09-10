@@ -80,6 +80,9 @@ const requests ={
     }).then(responseBody),
     putForm:(url:string,data:FormData) => axios.put(url,data,{
         headers:{'Content-type':'multipart/form-data'}
+    }).then(responseBody),
+    postJson: (url: string, data: any) => axios.post(url, data, {
+        headers: { 'Content-Type': 'application/json' }
     }).then(responseBody)
 }
 
@@ -111,7 +114,7 @@ const Admin ={
 }
 
 const Email = {
-    sendMail:(mail:any) => requests.postForm('contact/submit',createFormData(mail))
+    sendMail:(mail:any) => requests.postJson('contact/submit',createFormData(mail))
 }
 
 const Projects = {
