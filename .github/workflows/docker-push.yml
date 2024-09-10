@@ -6,7 +6,6 @@ on:
         - 'dev'
     pull_request:
       branches: 
-        - 'test' 
         - 'main'
       types: [closed]
 
@@ -31,20 +30,6 @@ jobs:
           context: "{{defaultContext}}:API"
           push: true
           tags: refentseg/portfolio:latest
-  pull-test-branch:
-        if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v3
-            - name: Set up Git
-              run: |
-                git config user.name 'github-actions'
-                git config user.email 'github-actions@github.com'
-            - name: Pull test branch
-              run: |
-                git fetch origin
-                git checkout test
-                git pull origin test
   deploy:
     needs: [docker, pull-test-branch]
     runs-on: ubuntu-latest
