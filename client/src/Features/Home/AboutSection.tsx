@@ -79,20 +79,22 @@ export default function AboutSection() {
           100% { transform: translateY(0px); }
         }
       `}</style>
-   <div id="about" className='flex mt-[6em] justify-center p-8 items-center flex-col md:flex-row gap-x-8 about-section mb-4'>
+   <div id="about" className='container flex mt-[6em] justify-center p-8 items-center flex-col md:flex-row gap-x-8 about-section mb-4'>
         <div className=' mb-8 md:mb-0 md:pr-8'>
             <img src="/Me.jpg"
             className="relative z-30 rounded-lg shadow-lg w-[300px] h-auto object-cover"/>
         </div>
         <div className='text-center md:text-left'>
             <div className='text-3xl font-bold'>Refentse Gaonnwe <br />
-              <HyperText
-                className="z-30 sm:text-xl md:text-3xl font-bold text-green-700 break-words"
-                text="Full-Stack Developer"
-              />
+            <div className="flex justify-center md:justify-start">
+                <HyperText
+                  className="z-30 text-xl md:text-3xl font-bold text-green-700"
+                  text="Full-Stack Developer"
+                />
+              </div>
             </div>
-            <div className='mt-2 mb-6 z-10'>
-                <p className='md:whitespace-pre-line whitespace-normal text-md md:text-lg text-gray-200'>
+            <div className=' mt-2 mb-6 z-10'>
+                <p className='whitespace-normal md:whitespace-pre-line  text-base md:text-lg text-gray-200 break-words'>
                 {`A Dedicated web development enthusiast with hands-on experience in creating and launching websites. 
                 I utilize skills in HTML, CSS, JavaScript, and backend technologies like Node.js and ASP.NET. Eager to 
                 contribute innovative solutions, expand technical expertise, and drive impactful projects in a collaborative,
