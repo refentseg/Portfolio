@@ -1,21 +1,16 @@
 name: CI/CD Pipeline
 
 on:
-    push:
+  workflow_dispatch:
+  push:
       branches: 
         - 'dev'
-    pull_request:
-      branches: 
-        - 'test' 
-        - 'main'
-      types: [closed]
 
 env:
   FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 
 jobs:
   docker:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
     runs-on: ubuntu-latest
     steps:
       - name: Set up Docker Buildx
@@ -31,27 +26,11 @@ jobs:
           context: "{{defaultContext}}:API"
           push: true
           tags: refentseg/portfolio:latest
-  pull-test-branch:
-        if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v3
-            - name: Set up Git
-              run: |
-                git config user.name 'github-actions'
-                git config user.email 'github-actions@github.com'
-            - name: Pull test branch
-              run: |
-                git fetch origin
-                git checkout test
-                git pull origin test
   deploy:
-    needs: [docker, pull-test-branch]
+    needs: docker
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: superfly/flyctl-actions/setup-flyctl@master
-      - name: Deploy to Test
-        run: flyctl deploy --remote-only -a refentse-portfolio-test
       - name: Deploy to Production
-        run: flyctl deploy --remote-only -a refentse-portfolio-live
+        run: flyctl deploy --remote-only -a refentse-portfolio
