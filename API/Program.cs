@@ -48,8 +48,8 @@ builder.Services.AddSingleton<IContactFormEmailSender>(sp =>
             builder.Configuration["AWS:AccessKeyId"],
             builder.Configuration["AWS:SecretAccessKey"],
             builder.Configuration["AWS:Region"],
-            builder.Configuration["EmailSettings:Email2"],
-            builder.Configuration["EmailSettings:Email2"]
+            builder.Configuration["EmailSettings:Email"],
+            builder.Configuration["EmailSettings:Email"]
         ));
 
 string connStr;

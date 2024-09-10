@@ -18,7 +18,6 @@ namespace API.Data
     private readonly IAmazonSimpleEmailService _sesClient;
     private readonly string _fromEmail;
     private readonly string _toEmail;
-    private readonly ILogger<SesContactFormEmailSender> _logger;
 
     public SesContactFormEmailSender(string awsAccessKeyId, string awsSecretAccessKey, string region, string fromEmail, string toEmail)
     {
