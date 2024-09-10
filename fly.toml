@@ -1,0 +1,25 @@
+# fly.toml app configuration file generated for refentse-portfolio-test on 2024-09-08T18:45:18+02:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'refentse-portfolio-test'
+primary_region = 'jnb'
+
+[build]
+  image = 'refentseg/portfolio:latest'
+
+[env]
+  Cloudinary__ApiKey = '877286754423351'
+  Cloudinary__CloudName = 'duzqlkgil'
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = 'stop'
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
+
+[[vm]]
+  size = 'shared-cpu-1x'

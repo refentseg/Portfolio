@@ -1,6 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import AnimatedGridPattern from "../../components/magicui/animated-grid-pattern";
-import cn from 'classnames';
 import HyperText from "../../components/magicui/hyper-text";
 
 export default function AboutSection() {
@@ -36,6 +34,19 @@ export default function AboutSection() {
       }
     };
     }, []);
+
+    function scrollToElement(id:any, offset = 0) {
+      const element = document.getElementById(id);
+      if (element) {
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - offset;
+    
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    }
   return (
     <div ref={sectionRef} className="relative md:h-[60vh] w-100">
     
@@ -84,10 +95,10 @@ export default function AboutSection() {
                 <p className='whitespace-pre-line text-lg text-gray-200'>
                 {`A Dedicated web development enthusiast with hands-on experience in creating and launching websites. 
                 I utilize skills in HTML, CSS, JavaScript, and backend technologies like Node.js and ASP.NET. Eager to 
-                contribute innovative solutions, expand technical expertise, and drive impactfulprojects in a collaborative,
+                contribute innovative solutions, expand technical expertise, and drive impactful projects in a collaborative,
                 growth-oriented environment`}
                 </p>
-                <button className='relative z-30 mt-4 bg-white p-4 text-black rounded-md items-center justify-center text-md hover:border-2 hover:border-green-400 hover:bg-transparent hover:text-white'>Contact Me</button>
+                <button className='relative z-30 mt-4 bg-white p-4 text-black rounded-md items-center justify-center text-md hover:border-2 hover:border-green-400 hover:bg-transparent hover:text-white' onClick={(e) => { e.preventDefault();scrollToElement('contact',40); }}>Contact Me</button>
             </div>
         </div>
    </div>

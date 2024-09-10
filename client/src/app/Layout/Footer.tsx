@@ -7,16 +7,18 @@ const XIcon = createLucideIcon("X", [
         d: "M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z",
         stroke: "none",
         fill: "currentColor",
+        key: "unique-key-1",
       },
     ],
   ]);
 
 export default function Footer(){
+  const currentYear = new Date().getFullYear();
 return(
 <footer className="bg-black border-t border-gray-400 py-4">
      <div className="container mx-auto flex justify-between items-center px-4">
         <p className="text-sm text-gray-300">
-        © 2024 All rights reserved.
+        © {currentYear} All rights reserved.
         </p>
         <div className="flex space-x-4">
             <a href="https://www.linkedin.com/in/rgaonnwe/" target='_blank' className="text-gray-200 hover:text-gray-500"><Linkedin size={24}/></a>

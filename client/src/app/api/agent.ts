@@ -10,6 +10,25 @@ axios.defaults.withCredentials=true;
 
 const responseBody = (response:AxiosResponse) => response.data;
 
+// axios.interceptors.request.use(config =>{
+//     const token = store.getState()
+//     if(token) {
+//         (config.headers as any).Authorization = `Bearer ${token}`;
+//     }
+//     return config;
+// })
+axios.interceptors.request.use(
+    (config) => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            config.headers['Authorization'] = `Bearer ${token}`;
+        }
+        return config;
+    },
+    (error) => Promise.reject(error)
+);
+
+
 axios.interceptors.response.use(async response =>{
     if(import.meta.env.DEV) await sleep();
     //pagination in small letters because axios works with small letters
@@ -61,21 +80,41 @@ const requests ={
     }).then(responseBody),
     putForm:(url:string,data:FormData) => axios.put(url,data,{
         headers:{'Content-type':'multipart/form-data'}
+    }).then(responseBody),
+    postJson: (url: string, data: any) => axios.post(url, data, {
+        headers: { 'Content-Type': 'application/json' }
     }).then(responseBody)
 }
 
 function createFormData(item:any) {
     const formData = new FormData();
     for (const key in item){
-        formData.append(key,item[key])
+        if (Array.isArray(item[key])) {
+            item[key].forEach((value: any, index: number) => {
+                formData.append(`${key}[${index}]`, value);
+            });
+        } else {
+            formData.append(key, item[key]);
+        }
     }
     return formData;
 }
 
+const Account ={
+    login: (values:any) =>requests.post('auth/login',values),
+    register: (values:any) =>requests.post('auth/register',values),
+    currentUser:() => requests.get('account/currentUser'),
+}
+
+
 const Admin ={
     createProject: (project:any) => requests.postForm('project',createFormData(project)),
     updateProject: (project:any) => requests.putForm('project',createFormData(project)),
-    deleteProject: (id:number) => requests.delete(`projects/${id}`),
+    deleteProject: (id:number) => requests.delete(`project/${id}`),
+}
+
+const Email = {
+    sendMail:(mail:any) => requests.postJson('contact/submit',createFormData(mail))
 }
 
 const Projects = {
@@ -84,8 +123,10 @@ const Projects = {
 }
 
 const agent = {
+    Account,
     Admin,
-    Projects
+    Projects,
+    Email
 }
 
 export default agent;

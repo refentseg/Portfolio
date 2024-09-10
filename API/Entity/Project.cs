@@ -7,7 +7,7 @@ namespace API.Entity
 {
     public class Project
     {
-        public int Id {get;set;}
+        public Guid Id {get;set;}
 
         public string PictureUrl{get;set;} = "";
 
