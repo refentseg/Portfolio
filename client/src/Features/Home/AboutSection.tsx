@@ -87,12 +87,12 @@ export default function AboutSection() {
         <div className='text-center md:text-left'>
             <div className='text-3xl font-bold'>Refentse Gaonnwe <br />
               <HyperText
-                className="z-30 text-3xl font-bold text-green-700 break-words"
+                className="z-30 sm:text-xl md:text-3xl font-bold text-green-700 break-words"
                 text="Full-Stack Developer"
               />
             </div>
             <div className='mt-2 mb-6 z-10'>
-                <p className='md:whitespace-pre-line whitespace-normal text-lg text-gray-200'>
+                <p className='md:whitespace-pre-line whitespace-normal text-md md:text-lg text-gray-200'>
                 {`A Dedicated web development enthusiast with hands-on experience in creating and launching websites. 
                 I utilize skills in HTML, CSS, JavaScript, and backend technologies like Node.js and ASP.NET. Eager to 
                 contribute innovative solutions, expand technical expertise, and drive impactful projects in a collaborative,
