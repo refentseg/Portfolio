@@ -3,17 +3,37 @@ import HomePage from '../../Features/Home/HomePage'
 import './App.css'
 import Header from './Header'
 import Footer from './Footer'
-import { useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
+import { useAppDispatch } from '../Store/configureStore'
+import { fetchCurrentUser} from '../../Features/account/accountSlice'
+import LoadingComponent from '../../components/LoadingComponent'
+import { ToastContainer } from 'react-toastify'  
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const location = useLocation();
-  const [loading,setLoading] = useState(false);
+  const dispatch = useAppDispatch();
+  const[loading,setLoading] = useState(true);
+  const initApp = useCallback(async () => {
+    try{
+      await dispatch(fetchCurrentUser());
+    }catch(error){
+      console.log(error)
+    }
+}, [dispatch]);
+
+useEffect(()=>{
+  initApp().then(()=>setLoading(false))
+},[initApp])
+if (loading) return <LoadingComponent message="Loading..." />
+
   return (
     <>
+    <ToastContainer  />
     <Header />
-    {
-      location.pathname === '/' ? <HomePage />:
-      <Outlet />
+    {loading?<LoadingComponent message="Loading..." />
+      :location.pathname === '/' ? <HomePage />
+      :<Outlet />
     }
     <Footer />
     </>

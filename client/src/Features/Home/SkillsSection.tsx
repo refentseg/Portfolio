@@ -1,4 +1,3 @@
-import React from 'react'
 
 const skills = [
     { name: '.Net', imgSrc: 'https://res.cloudinary.com/duzqlkgil/image/upload/v1724838105/Net-PNG_eplbbg.png' },

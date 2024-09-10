@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Entity;
+using Microsoft.AspNetCore.Identity;
 
 namespace API.Data
 {
     public class DBIntializier
     {
-        public static async Task IntializeAsync(ProjectContext context)
+        public static async Task IntializeAsync(ProjectContext context,UserManager<User> userManager)
         {
             if (!context.Technologies.Any())
             {

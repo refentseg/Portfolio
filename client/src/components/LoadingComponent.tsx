@@ -1,0 +1,15 @@
+
+interface Props{
+    message?:string;
+}
+
+const LoadingComponent = ({ message }:Props) => {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900"></div>
+        <span className="ml-4 text-gray-900 font-medium">{message}</span>
+      </div>
+    );
+  };
+  
+  export default LoadingComponent;

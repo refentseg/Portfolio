@@ -8,6 +8,7 @@ using API.Entity;
 using API.Extensions;
 using API.RequestHelpers;
 using API.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -40,7 +41,7 @@ namespace API.Controllers
         }
 
         [HttpGet("{id}",Name ="GetProject")]
-        public async Task<ActionResult<ProjectDTO>> GetProject(int id)
+        public async Task<ActionResult<ProjectDTO>> GetProject(Guid id)
         {
             return await _context.Projects
                 .ProjectProjectToProjectDto()
@@ -48,7 +49,7 @@ namespace API.Controllers
                 .FirstOrDefaultAsync();
 
         }
-
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<ProjectDTO>> CreateProject([FromForm] CreateProjectDto createProjectDto)
         {
@@ -99,9 +100,9 @@ namespace API.Controllers
             if(result) return CreatedAtAction(nameof(GetProject), new { id = project.Id }, projectDto);
             return BadRequest(new ProblemDetails{Title = "Problem creating new product"});
         }
-
+        [Authorize]
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateProject(int id, [FromForm] UpdateProjectDto updateProjectDto)
+        public async Task<IActionResult> UpdateProject(Guid id, [FromForm] UpdateProjectDto updateProjectDto)
         {
             var project = await _context.Projects
                 .Include(p => p.Technologies)
@@ -162,7 +163,7 @@ namespace API.Controllers
             if(result) return Ok(projectDto);
             return BadRequest(new ProblemDetails{Title="Problem updating project"});
         }
-
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProject(int id)
         {
