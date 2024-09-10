@@ -31,7 +31,7 @@ jobs:
           push: true
           tags: refentseg/portfolio:latest
   deploy:
-    needs: [docker]
+    needs: docker
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
