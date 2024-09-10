@@ -110,7 +110,7 @@ const Account ={
 const Admin ={
     createProject: (project:any) => requests.postForm('project',createFormData(project)),
     updateProject: (project:any) => requests.putForm('project',createFormData(project)),
-    deleteProject: (id:number) => requests.delete(`project/${id}`),
+    deleteProject: (id:string) => requests.delete(`project/${id}`)
 }
 
 const Email = {
