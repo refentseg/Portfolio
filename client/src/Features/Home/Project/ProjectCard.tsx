@@ -31,7 +31,7 @@ export default function ProjectCard({project}:Props) {
                 {project.technologies.slice(rowIndex * 4, rowIndex * 4 + 4).map((tech, index) => (
                   <span
                     key={index}
-                    className="inline-block bg-neutral-800 text-white text-xs md:text-sm font-semibold rounded-full px-2 sm:px-3 py-1 whitespace-nowrap"
+                    className="inline-block bg-neutral-800 text-white text-xs sm:text-sm font-semibold rounded-full px-3 sm:px-4 py-2 whitespace-nowrap min-w-[80px] text-center"
                   >
                     {tech}
                   </span>
