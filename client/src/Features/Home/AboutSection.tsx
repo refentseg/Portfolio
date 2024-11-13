@@ -1,10 +1,41 @@
 import { useEffect, useRef, useState } from "react";
 import HyperText from "../../components/magicui/hyper-text";
+import { Download } from "lucide-react";
 
 export default function AboutSection() {
     const [position, setPosition] = useState({ x: 0, y: 0 });
     const [isHovering, setIsHovering] = useState(false);
     const sectionRef = useRef<HTMLDivElement | null>(null);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+
+    const handleDownload = async () => {
+      setIsLoading(true);
+      setError(null);
+      
+      try {
+        const response = await fetch('https://refentsegaonnwe.co.za/CV/Refentse_Gaonnwe_CV.pdf');
+        
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'Refentse_Gaonnwe_CV.pdf';
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        window.URL.revokeObjectURL(url);
+      } catch (err) {
+          setError('Failed to download CV. Please try again later.');
+          console.error('Download error:', err);
+      } finally {
+          setIsLoading(false);
+      }
+  };
 
     useEffect(() => {
       const updatePosition = (e:any) => {
@@ -108,7 +139,13 @@ export default function AboutSection() {
                     }}>
                     Contact Me
                   </button>
+                  <button onClick={handleDownload}
+                  disabled={isLoading} className="z-30 bg-white p-4 gap-3 ml-7 text-black rounded-md flex items-center justify-center text-md hover:border-2 hover:border-white hover:bg-transparent hover:text-white">
+                  <Download size={16} className="mb-2"/> {isLoading ? 'Downloading...' : 'Download CV'}
+                  </button>
+                  
                 </div>
+                <p className="mt-2 text-red-500 text-md">{error? error :''}</p>
             </div>
         </div>
    </div>

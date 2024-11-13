@@ -10,13 +10,6 @@ axios.defaults.withCredentials=true;
 
 const responseBody = (response:AxiosResponse) => response.data;
 
-// axios.interceptors.request.use(config =>{
-//     const token = store.getState()
-//     if(token) {
-//         (config.headers as any).Authorization = `Bearer ${token}`;
-//     }
-//     return config;
-// })
 axios.interceptors.request.use(
     (config) => {
         const token = localStorage.getItem('token');
@@ -83,7 +76,7 @@ const requests ={
     }).then(responseBody),
     postJson: (url: string, data: any) => axios.post(url, data, {
         headers: { 'Content-Type': 'application/json' }
-    }).then(responseBody)
+    }).then(responseBody),
 }
 
 function createFormData(item:any) {
@@ -117,6 +110,7 @@ const Email = {
     sendMail:(mail:any) => requests.postJson('contact/submit',createFormData(mail))
 }
 
+
 const Projects = {
     list:(params: URLSearchParams)=>requests.get('project',params),
     details:(id:number) => requests.get(`project/${id}`),
@@ -126,7 +120,7 @@ const agent = {
     Account,
     Admin,
     Projects,
-    Email
+    Email,
 }
 
 export default agent;
