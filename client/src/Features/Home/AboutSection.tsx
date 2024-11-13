@@ -79,26 +79,36 @@ export default function AboutSection() {
           100% { transform: translateY(0px); }
         }
       `}</style>
-   <div id="about" className='flex mt-[6em] justify-center p-8 items-center flex-col md:flex-row gap-x-8 about-section'>
-        <div className='md:1/2 mb-8 md:mb-0 md:pr-8'>
+   <div id="about" className='container flex mt-[6em] justify-center p-8 items-center flex-col md:flex-row gap-x-8 about-section mb-4'>
+        <div className=' mb-8 md:mb-0 md:pr-8'>
             <img src="/Me.jpg"
             className="relative z-30 rounded-lg shadow-lg w-[300px] h-auto object-cover"/>
         </div>
-        <div className='md:1/2'>
+        <div className='text-center md:text-left'>
             <div className='text-3xl font-bold'>Refentse Gaonnwe <br />
-            <HyperText
-              className="z-30 text-3xl font-bold text-green-700 "
-              text="Full-Stack Developer"
-            />
-    </div>
-            <div className='mt-2 mb-6 z-10'>
-                <p className='whitespace-pre-line text-lg text-gray-200'>
+            <div className="flex justify-center md:justify-start">
+                <HyperText
+                  className="z-30 text-xl md:text-3xl font-bold text-green-700"
+                  text="Full-Stack Developer"
+                />
+              </div>
+            </div>
+            <div className=' mt-2 mb-6 z-10'>
+                <p className='whitespace-normal md:whitespace-pre-line  text-md md:text-lg text-gray-200 break-words'>
                 {`A Dedicated web development enthusiast with hands-on experience in creating and launching websites. 
                 I utilize skills in HTML, CSS, JavaScript, and backend technologies like Node.js and ASP.NET. Eager to 
                 contribute innovative solutions, expand technical expertise, and drive impactful projects in a collaborative,
                 growth-oriented environment`}
                 </p>
-                <button className='relative z-30 mt-4 bg-white p-4 text-black rounded-md items-center justify-center text-md hover:border-2 hover:border-green-400 hover:bg-transparent hover:text-white' onClick={(e) => { e.preventDefault();scrollToElement('contact',40); }}>Contact Me</button>
+                <div className="flex justify-center lg:justify-start mt-4">
+                  <button className="z-30 bg-white p-4 text-black rounded-md flex items-center justify-center text-md hover:border-2 hover:border-green-400 hover:bg-transparent hover:text-white" 
+                    onClick={(e) => { 
+                      e.preventDefault();
+                      scrollToElement('contact', 40); 
+                    }}>
+                    Contact Me
+                  </button>
+                </div>
             </div>
         </div>
    </div>

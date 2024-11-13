@@ -165,7 +165,7 @@ namespace API.Controllers
         }
         [Authorize]
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProject(int id)
+        public async Task<IActionResult> DeleteProject(Guid id)
         {
             //Find Project
             var project = await _context.Projects.FindAsync(id);

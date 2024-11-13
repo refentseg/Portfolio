@@ -25,16 +25,20 @@ export default function ProjectCard({project}:Props) {
 
         <div className="mt-4">
           <h3 className="text-lg font-semibold mb-2 text-white">Technologies:</h3>
-          <div className="grid grid-cols-4 gap-2 text-white">
-            {project.technologies.map((tech,index) => (
-              <span 
-                key={index} 
-                className="inline-block bg-neutral-800 text-white text-sm font-semibold  rounded-full px-3 py-1 whitespace-nowrap items-center"
-              >
-                {tech}
-              </span>
+          <div className="flex flex-wrap" style={{ gap: '0.5rem' }}>
+            {[...Array(Math.ceil(project.technologies.length / 4))].map((_, rowIndex) => (
+              <div key={rowIndex} className="flex gap-2 w-full">
+                {project.technologies.slice(rowIndex * 4, rowIndex * 4 + 4).map((tech, index) => (
+                  <span
+                    key={index}
+                    className="inline-flex items-center justify-center bg-neutral-800 text-white text-xs md:text-sm font-semibold rounded-full px-2 sm:px-3 py-1 whitespace-nowrap"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
             ))}
-          </div>
+           </div>
         </div>
     </div>
   )

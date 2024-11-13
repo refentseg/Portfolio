@@ -13,7 +13,7 @@ const {projects} = UseProjects();
 const dispatch = useAppDispatch();
   const [editMode,setEditMode] = useState(false);
   const [selectedProject,setSelectedProject] = useState<Project | undefined>(undefined);
-  const [target,setTarget] = useState(0)
+  const [target,setTarget] = useState('')
   const [loading,setLoading] = useState(false)
 
   function handleSelectProject(project:Project){
@@ -21,7 +21,7 @@ const dispatch = useAppDispatch();
       setEditMode(true);
   }
 
-  function handleDeleteProject(id:number){
+  function handleDeleteProject(id:string){
       setLoading(true);
       setTarget(id)
       agent.Admin.deleteProject(id)
