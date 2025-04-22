@@ -139,10 +139,10 @@ export default function AboutSection() {
                     }}>
                     Contact Me
                   </button>
-                  <button onClick={handleDownload}
+                  {/* <button onClick={handleDownload}
                   disabled={isLoading} className="z-30 bg-white p-4 gap-3 ml-7 text-black rounded-md flex items-center justify-center text-md hover:border-2 hover:border-white hover:bg-transparent hover:text-white">
                   <Download size={16} className="mb-2"/> {isLoading ? 'Downloading...' : 'Download CV'}
-                  </button>
+                  </button> */}
                   
                 </div>
                 <p className="mt-2 text-red-500 text-md">{error? error :''}</p>
