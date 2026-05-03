@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,29 +16,24 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
+builder.Services.AddOpenApi();
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPIv5", Version = "v1" });
-    var jwtSecurityScheme = new OpenApiSecurityScheme
+    c.AddSecurityDefinition(JwtBearerDefaults.AuthenticationScheme, new OpenApiSecurityScheme
     {
         BearerFormat = "JWT",
         Name = "Authorization",
         In = ParameterLocation.Header,
         Type = SecuritySchemeType.ApiKey,
         Scheme = JwtBearerDefaults.AuthenticationScheme,
-        Description ="Bearer + Token",
-        Reference = new OpenApiReference
-        {
-            Id = JwtBearerDefaults.AuthenticationScheme,
-            Type = ReferenceType.SecurityScheme
-        }
-        
-    };
-    c.AddSecurityDefinition(jwtSecurityScheme.Reference.Id,jwtSecurityScheme);
-    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+        Description = "Bearer + Token"
+    });
+    c.AddSecurityRequirement(_ => new OpenApiSecurityRequirement
     {
         {
-            jwtSecurityScheme,Array.Empty<string>()
+            new OpenApiSecuritySchemeReference(JwtBearerDefaults.AuthenticationScheme),
+            new List<string>()
         }
     });
 });
