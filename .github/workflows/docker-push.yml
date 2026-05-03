@@ -3,8 +3,9 @@ name: CI/CD Pipeline
 on:
   workflow_dispatch:
   push:
-      branches: 
+      branches:
         - 'dev'
+        - 'main'
 
 env:
   FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}

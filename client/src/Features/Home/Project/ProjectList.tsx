@@ -12,7 +12,7 @@ export default function ProjectList({projects}:Props){
     return(
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
         {projects?.length === 0 ? (
-        <p className="text-lg text-gray-300">Project not found</p>
+        <p className="text-lg text-gray-400 col-span-full text-center py-8">No projects to show yet. Check back soon!</p>
         ) : (
           projects?.map((project) => (
             <div key={project.id} className="">

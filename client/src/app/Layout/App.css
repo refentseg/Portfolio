@@ -3,21 +3,9 @@
   --transparent: hsla(0, 0%, 100%, 0);
   --color-border: hsla(0, 0%, 100%, 0.1);
   --color-text-primary: #f7f8f8;
-  --color-brand-bg: #ffffff;
+  --color-brand-bg: rgb(45, 45, 210);
   --color-brand-text: #fff;
   --color-text: rgb(212, 212, 212);
-  --color-brand-bg: rgb(45, 45, 210);
-}
-
-:root {
-  --color-bg-primary: #000212;
-  --transparent: hsla(0, 0%, 100%, 0);
-  --color-border: hsla(0, 0%, 100%, 0.1);
-  --color-text-primary: #f7f8f8;
-  --color-brand-bg: #ffffff;
-  --color-brand-text: #fff;
-  --color-text: rgb(212, 212, 212);
-  --color-brand-bg: rgb(45, 45, 210);
 }
 
 .about-section{
@@ -53,7 +41,7 @@
 .navbar {
   position: fixed;
   top: 1em;
-  width: 40%;
+  width: fit-content;
   height: 55px;
   padding: 0 1em;
   color: var(--color-text-primary);
@@ -116,6 +104,7 @@
   display: flex;
   gap: 0.25em;
   list-style: none;
+  white-space: nowrap;
 }
 
 .navbar-items ul li {
@@ -132,6 +121,7 @@
 .navbar-items .btn {
   line-height: 55px;
   margin-left: 1em;
+  white-space: nowrap;
 }
 
 .navbar-items .btn a {

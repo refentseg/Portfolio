@@ -8,9 +8,9 @@ return(
         <p className="text-sm text-gray-300">
         © {currentYear} All rights reserved.
         </p>
-        <div className="flex space-x-4">
-            <a href="https://www.linkedin.com/in/rgaonnwe/" target='_blank' className="text-gray-200 hover:text-gray-500"><Linkedin size={24}/></a>
-            <a href="https://github.com/refentseg" target='_blank' className="text-gray-200 hover:text-gray-500">
+        <div className="flex space-x-2">
+            <a href="https://www.linkedin.com/in/rgaonnwe/" target='_blank' className="text-gray-200 hover:text-gray-500 p-2"><Linkedin size={24}/></a>
+            <a href="https://github.com/refentseg" target='_blank' className="text-gray-200 hover:text-gray-500 p-2">
         <svg
             fill="currentColor"
             viewBox="0 0 16 16"

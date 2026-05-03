@@ -40,7 +40,7 @@ export default function Contact() {
       <div className="hidden md:block overlay"></div>
        <video className="hidden md:block video-overlay"src={VideoBG} autoPlay loop muted></video>
     <div className="md:absolute z-10 mx-auto w-full max-w-lg mt-6 md:mt-0 rounded-md p-8 bg-[#00041b] bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-50 backdrop-saturate-50 backdrop-contrast-50">
-      <h1 className="text-4xl font-medium">Contact me</h1>
+      <h2 className="text-4xl font-medium">Contact me</h2>
       <p className="mt-3">Email me at me@refentsegaonnwe.co.za or message me here:</p>
   
       <form className="mt-10" onSubmit={handleSubmit(onSubmit)}>
