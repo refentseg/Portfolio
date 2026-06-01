@@ -6,7 +6,8 @@ return(
 <footer className="bg-black border-t border-gray-400 py-4">
      <div className="container mx-auto flex justify-between items-center px-4">
         <p className="text-sm text-gray-300">
-        © {currentYear} All rights reserved.
+        © {currentYear} Refentse Gaonnwe. Founder of{' '}
+        <a href="https://tobetsa.co.za" target="_blank" className="text-green-500 hover:text-green-400">Tobetsa IT</a>.
         </p>
         <div className="flex space-x-2">
             <a href="https://www.linkedin.com/in/rgaonnwe/" target='_blank' className="text-gray-200 hover:text-gray-500 p-2"><Linkedin size={24}/></a>
